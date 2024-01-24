@@ -1,26 +1,22 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./Form.css";
 import NewsletterFeature from "../NewsletterFeatures/NewsletterFeature";
 
 const Form = () => {
-  const [userEmail, setUserEmail] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    getValues,
+  } = useForm();
 
-  console.log(userEmail);
-
-  function onHandleChange(e) {
-    const { name, value } = e.target;
-    setUserEmail((prevFormData) => {
-      return {
-        ...prevFormData,
-        [name]: value,
-      };
-    });
-  }
-
-  function onHandleSubmit(e) {
-    e.preventDefault();
-    console.log("Form Submitted");
-  }
+  const onHandleSubmit = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log("email accepted...");
+    reset();
+  };
 
   return (
     <div>
@@ -34,29 +30,45 @@ const Form = () => {
             <p className="mb-6 md:mb-7 md:text-lg">
               Join 60,000+ product managers receiving monthly updates on:
             </p>
-
             <div>
               <NewsletterFeature feature="Product discovery and building what matters" />
               <NewsletterFeature feature="Measuring to ensure updates are a success" />
               <NewsletterFeature feature="And much more!" />
             </div>
-            <form className="mt-8 md:mt-10" onSubmit={onHandleSubmit}>
-              <label
-                htmlFor="email"
-                className="block text-sm font-bold text-[#242742] mb-4"
-              >
-                Email address
-              </label>
+            <form
+              className="mt-8 md:mt-10"
+              onSubmit={handleSubmit(onHandleSubmit)}
+            >
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-bold text-[#242742] mb-2"
+                >
+                  Email address
+                </label>
+                {errors.email && (
+                  <p className=" text-red-500 text-sm font-bold mb-2">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
               <input
+                {...register("email", {
+                  required: "Email field is empty",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Please enter a valid email address.",
+                  },
+                })}
                 htmlFor="email"
                 name="email"
-                onChange={onHandleChange}
                 type="text"
                 placeholder="email@company.com"
                 className="border border-gray-300 px-6 py-4 w-full shadow-sm rounded-lg mb-6"
               />
-
               <button
+                disabled={isSubmitting}
                 className="btn bg-[#242742] text-white cursor-pointer py-4 text-center w-full shadow-sm rounded-lg mb-8"
                 value={"Subscribe to monthly newsletter"}
               >
