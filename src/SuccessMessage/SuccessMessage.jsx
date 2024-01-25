@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const SuccessMessage = () => {
   return (
@@ -34,9 +34,11 @@ const SuccessMessage = () => {
           <span className="font-bold">ash@loremcompany.com</span>. Please open
           it and click the button inside to confirm your subscription.
         </p>
-        <button className="btn bg-[#242742] text-white cursor-pointer py-3 text-center w-full shadow-sm rounded-lg font-semibold">
-          Dismiss message
-        </button>
+        <Link to="/" className="w-full">
+          <button className="btn bg-[#242742] text-white cursor-pointer py-3 text-center w-full shadow-sm rounded-lg font-semibold">
+            Dismiss message
+          </button>
+        </Link>
       </div>
     </main>
   );

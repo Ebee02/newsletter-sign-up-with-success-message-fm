@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import "./Form.css";
 import NewsletterFeature from "../NewsletterFeatures/NewsletterFeature";
 
@@ -12,9 +13,11 @@ const Form = () => {
     getValues,
   } = useForm();
 
+  const navigate = useNavigate();
+
   const onHandleSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("form submitted");
+    navigate("/success");
     reset();
   };
 
