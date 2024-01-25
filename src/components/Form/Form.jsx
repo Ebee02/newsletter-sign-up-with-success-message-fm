@@ -14,7 +14,7 @@ const Form = () => {
 
   const onHandleSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("email accepted...");
+    console.log("form submitted");
     reset();
   };
 
@@ -65,10 +65,11 @@ const Form = () => {
                 name="email"
                 type="text"
                 placeholder="email@company.com"
-                className="border border-gray-300 px-6 py-4 w-full shadow-sm rounded-lg mb-6"
+                className={`${
+                  errors.email ? "bg-red-50 text-red-500" : ""
+                } border border-gray-300 px-8 py-4 w-full shadow-sm rounded-lg mb-6`}
               />
               <button
-                disabled={isSubmitting}
                 className="btn bg-[#242742] text-white cursor-pointer py-4 text-center w-full shadow-sm rounded-lg mb-8"
                 value={"Subscribe to monthly newsletter"}
               >
@@ -76,12 +77,6 @@ const Form = () => {
               </button>
             </form>
           </div>
-          {/* <!-- Sign-up form end --> */}
-          {/* <!-- Success message start --> */}
-          {/* Thanks for subscribing! A confirmation email has been sent to
-        ash@loremcompany.com. Please open it and click the button inside to
-        confirm your subscription. Dismiss message */}
-          {/* <!-- Success message end --> */}
         </div>
 
         {/* <div className="attribution">
