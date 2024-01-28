@@ -1,5 +1,6 @@
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import SuccessMessage from "../../SuccessMessage/SuccessMessage";
 
 import "./Form.css";
 import NewsletterFeature from "../NewsletterFeatures/NewsletterFeature";
@@ -11,19 +12,26 @@ const Form = () => {
     formState: { errors, isSubmitting },
     reset,
     getValues,
+    control,
   } = useForm();
 
   const navigate = useNavigate();
 
   const onHandleSubmit = async (data) => {
+    const formData = getValues();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     navigate("/success");
     reset();
   };
 
+  const updateEmailDataInChild = () => {
+    const emailData = control.getValues("email");
+    onValueUpdate = emailData;
+  };
+
   return (
     <div>
-      <main className="min-h-screen flex justify-center items-center p-12 font-[16px] bg-[#36384e]">
+      <main className="min-h-screen flex flex-col justify-center items-center p-12 font-[16px] bg-[#36384e]">
         <div className="flex flex-col md:flex-row-reverse w-[375px] md:w-[1040px] h-[850px] md:h-[600px] bg-white shadow-sm shadow-gray-50 md:rounded-3xl md:p-6 md:gap-x-8">
           <div className="image-container flex-1 h-[284px] md:h-full w-full rounded-b-2xl mb-8 md:rounded-2xl"></div>
           <div className="flex-1 w-full md:h-full px-5 md:p-5 text-[#36384e] font-medium md:rounded-2xl">
@@ -82,13 +90,21 @@ const Form = () => {
           </div>
         </div>
 
-        {/* <div className="attribution">
-        Challenge by{" "}
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
-          Frontend Mentor
-        </a>
-        . Coded by <a href="#">Your Name Here</a>.
-      </div> */}
+        <div className="mt-4 text-white font-semibold">
+          Challenge by{" "}
+          <a
+            href="https://www.frontendmentor.io?ref=challenge"
+            className="text-[#FF6A3A]"
+            target="_blank"
+          >
+            Frontend Mentor
+          </a>
+          . Coded by{" "}
+          <a href="#" className="text-[#FF6A3A] cursor-not-allowed">
+            Tech Rocket
+          </a>
+          .
+        </div>
       </main>
     </div>
   );

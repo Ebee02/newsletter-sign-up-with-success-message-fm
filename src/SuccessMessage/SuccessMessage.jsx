@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const SuccessMessage = () => {
+const SuccessMessage = (props) => {
   return (
-    <main className="min-h-screen flex justify-center items-center p-12 font-[16px] bg-[#36384e]">
-      <div className="flex items-center flex-col w-[375px] h-[850px] md:h-[420px] bg-white shadow-sm shadow-gray-50 md:rounded-3xl px-8 md:p-9">
+    <main className="relative min-h-screen flex justify-center items-center px-1 font-[16px] bg-[#36384e]">
+      <div className="relative flex items-center flex-col w-[400px] h-[850px] md:h-[420px] bg-white shadow-sm shadow-gray-50 md:rounded-3xl px-8 md:p-9">
         <div className="mt-36 md:mt-0 w-full mb-7">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,14 +28,16 @@ const SuccessMessage = () => {
             </g>
           </svg>
         </div>
-        <h1 className="text-4xl font-semibold mb-7">Thanks for subscribing!</h1>
-        <p className="text-base font-semibold  mb-6">
+        <h1 className="text-4xl tracking-wide font-semibold mb-7">
+          Thanks for subscribing!
+        </h1>
+        <p className="text-base font-semibold mb-6">
           A confirmation email has been sent to{" "}
           <span className="font-bold">ash@loremcompany.com</span>. Please open
           it and click the button inside to confirm your subscription.
         </p>
-        <Link to="/" className="w-full">
-          <button className="btn bg-[#242742] text-white cursor-pointer py-3 text-center w-full shadow-sm rounded-lg font-semibold">
+        <Link to="/" className="absolute bottom-8 w-full px-8">
+          <button className="btn bg-[#242742] text-white cursor-pointer text-center w-full py-3  shadow-sm rounded-lg font-semibold">
             Dismiss message
           </button>
         </Link>
