@@ -103,7 +103,6 @@ const Form = () => {
           </a>
           .
         </div>
-        <SuccessMessage />
       </main>
     </div>
   );
