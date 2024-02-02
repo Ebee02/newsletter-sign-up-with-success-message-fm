@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
 
 const SuccessMessage = (props) => {
+  const { state } = useLocation();
+
   return (
     <main className="relative min-h-screen flex justify-center items-center px-1 font-[16px] bg-[#36384e]">
       <div className="relative flex items-center flex-col w-[400px] h-[850px] md:h-[420px] bg-white shadow-sm shadow-gray-50 md:rounded-3xl px-8 md:p-9">
@@ -33,8 +36,8 @@ const SuccessMessage = (props) => {
         </h1>
         <p className="text-base font-semibold mb-6">
           A confirmation email has been sent to{" "}
-          <span className="font-bold">ash@loremcompany.com</span>. Please open
-          it and click the button inside to confirm your subscription.
+          <span className="font-bold">{state?.emailValue}</span>. Please open it
+          and click the button inside to confirm your subscription.
         </p>
         <Link to="/" className="absolute bottom-8 w-full px-8">
           <button className="btn bg-[#242742] text-white cursor-pointer text-center w-full py-3  shadow-sm rounded-lg font-semibold">

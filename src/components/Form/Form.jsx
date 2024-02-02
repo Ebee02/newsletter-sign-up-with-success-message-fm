@@ -1,32 +1,29 @@
-import { get, useForm } from "react-hook-form";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import SuccessMessage from "../../SuccessMessage/SuccessMessage";
-
 import "./Form.css";
 import NewsletterFeature from "../NewsletterFeatures/NewsletterFeature";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
 
 const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
-    getValues,
-    control,
   } = useForm();
 
   const navigate = useNavigate();
+  const [emailValue, setEmailValue] = useState("");
 
   const onHandleSubmit = async (data) => {
-    const formData = getValues();
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    navigate("/success");
+    navigate("/success", { state: { emailValue: emailValue } });
     reset();
   };
 
-  const updateEmailDataInChild = () => {
-    const emailData = control.getValues("email");
-    onValueUpdate = emailData;
+  const onHandleChange = (event) => {
+    setEmailValue(event.target.value);
   };
 
   return (
@@ -76,12 +73,13 @@ const Form = () => {
                 name="email"
                 type="text"
                 placeholder="email@company.com"
+                onChange={onHandleChange}
                 className={`${
                   errors.email ? "bg-red-50 text-red-500" : ""
                 } border border-gray-300 px-8 py-4 w-full shadow-sm rounded-lg mb-6`}
               />
               <button
-                className="btn bg-[#242742] text-white cursor-pointer py-4 text-center w-full shadow-sm rounded-lg mb-8"
+                className="btn bg-[#242742] text-white cursor-pointer py-4 text-center w-full shadow-md rounded-lg mb-8"
                 value={"Subscribe to monthly newsletter"}
               >
                 Subscribe to monthly newsletter
@@ -90,7 +88,7 @@ const Form = () => {
           </div>
         </div>
 
-        <div className="mt-4 text-white font-semibold">
+        <div className="mt-4 text-white text-sm text-center tracking-wide font-semibold">
           Challenge by{" "}
           <a
             href="https://www.frontendmentor.io?ref=challenge"
@@ -105,6 +103,7 @@ const Form = () => {
           </a>
           .
         </div>
+        <SuccessMessage />
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
 import "./index.css";
-import SuccessMessage from "./SuccessMessage/SuccessMessage";
+import SuccessMessage from "./components/SuccessMessage/SuccessMessage";
 import Form from "./components/Form/Form";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
