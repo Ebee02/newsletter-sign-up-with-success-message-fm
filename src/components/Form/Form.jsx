@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./Form.css";
@@ -10,19 +9,16 @@ const Form = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
   } = useForm();
 
   const navigate = useNavigate();
-  const [emailValue, setEmailValue] = useState("");
 
   const onHandleSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
+    const emailValue = getValues("email");
     navigate("/success", { state: { emailValue: emailValue } });
     reset();
-  };
-
-  const onHandleChange = (event) => {
-    setEmailValue(event.target.value);
   };
 
   return (
@@ -72,7 +68,6 @@ const Form = () => {
                 name="email"
                 type="text"
                 placeholder="example@gmail.com"
-                onChange={onHandleChange}
                 className={`${
                   errors.email ? "bg-red-50 text-tomato-red" : ""
                 } border border-gray-300 px-8 py-4 w-full shadow-sm rounded-lg mb-6`}
