@@ -1,11 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { useContext } from "react";
 
-const SuccessMessage = (props) => {
+const SuccessMessage = () => {
   const { state } = useLocation();
 
   return (
-    <main className="relative min-h-screen flex justify-center items-center px-1 font-[16px] bg-[#36384e]">
+    <main className="relative min-h-screen flex justify-center items-center px-1 font-[16px] bg-charcoal-grey">
       <div className="relative flex items-center flex-col w-[400px] h-[850px] md:h-[420px] bg-white shadow-sm shadow-gray-50 md:rounded-3xl px-8 md:p-9">
         <div className="mt-36 md:mt-0 w-full mb-7">
           <svg
@@ -40,7 +39,7 @@ const SuccessMessage = (props) => {
           and click the button inside to confirm your subscription.
         </p>
         <Link to="/" className="absolute bottom-8 w-full px-8">
-          <button className="btn bg-[#242742] text-white cursor-pointer text-center w-full py-3  shadow-sm rounded-lg font-semibold">
+          <button className="btn bg-dark-slate-grey text-white cursor-pointer text-center w-full py-3  shadow-sm rounded-lg font-semibold">
             Dismiss message
           </button>
         </Link>
